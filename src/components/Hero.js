@@ -53,7 +53,7 @@ const Hero = () => {
         {["Work", "Scripts", "Reel", "Info", "Art"].map((item) => (
           <span
             key={item}
-            className="text-sm uppercase text-yellow-500 tracking-[5px] sm:tracking-[10px] md:tracking-[15px] mx-2 cursor-pointer hover:text-white"
+            className="text-sm uppercase text-[#F3C623] tracking-[5px] sm:tracking-[10px] md:tracking-[15px] mx-2 cursor-pointer hover:text-white"
             onClick={() => navigateToPage(item)}
           >
             {item}
