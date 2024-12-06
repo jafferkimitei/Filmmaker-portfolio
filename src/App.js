@@ -17,7 +17,7 @@ function App() {
     const backgroundMusic = new Howl({
       src: [bgMusic],
       loop: true,
-      volume: 0.2, // Adjust volume as needed
+      volume: 0.5,
     });
 
     backgroundMusic.play();
