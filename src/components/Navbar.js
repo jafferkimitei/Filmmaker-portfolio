@@ -73,6 +73,10 @@ const Navbar = () => {
         <li className="px-4">
           <Link to="/art" onClick={handleLinkClick}>Art</Link>
         </li>
+        <li>|</li>
+        <li className="px-4">
+          <Link to="/photos" onClick={handleLinkClick}>Photos</Link>
+        </li>
       </ul>
 
       {/* Mobile Menu */}
@@ -114,6 +118,7 @@ const Navbar = () => {
         <Link to="/reel" onClick={handleLinkClick} className="py-4 text-xl font-futura">Reel</Link>
         <Link to="/info" onClick={handleLinkClick} className="py-4 text-xl font-futura">Info</Link>
         <Link to="/art" onClick={handleLinkClick} className="py-4 text-xl font-futura">Art</Link>
+        <Link to="/photos" onClick={handleLinkClick} className="py-4 text-xl font-futura">Photos</Link>
       </div>
     </nav>
   );

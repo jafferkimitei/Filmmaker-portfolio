@@ -64,14 +64,16 @@ function App() {
       <AnimatePresence mode="wait" initial={false} onExitComplete={() => wooshSound.play()}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Hero />} />
-          <Route path="/work" element={<DummyPage title="Work" description="PROJECTS | COLLABORATIONS | EXPLORATIONS" />}  projects={workProjects}
+          <Route path="/work" element={<DummyPage />}  projects={workProjects}
       linkType="youtubeLink" />
-          <Route path="/scripts" element={<DummyPage title="Scripts" description="IDEA | STORY | ARTICLES" />} projects={scripts}
+          <Route path="/scripts" element={<DummyPage />} projects={scripts}
       linkType="mediumLink" />
-          <Route path="/reel" element={<DummyPage title="Reel" />} />
-          <Route path="/info" element={<DummyPage title="Info" description="BIOGRAPHY | SERVICES | CONTACT" />} />
-          <Route path="/art" element={<DummyPage title="Art" description="MOTION | CONCEPT ART"/>}  projects={motionProjects}
+          <Route path="/reel" element={<DummyPage />} />
+          <Route path="/info" element={<DummyPage />} />
+          <Route path="/art" element={<DummyPage />}  projects={motionProjects}
       linkType="behanceLink" />
+       <Route path="/photos" element={<DummyPage />} />
+
         </Routes>
       </AnimatePresence>
     </div>

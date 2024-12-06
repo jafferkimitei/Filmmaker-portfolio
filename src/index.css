@@ -18,7 +18,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.masonry-container {
+  margin-top: 35vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  margin-bottom: 5vh;
+  column-count: 4; /* Number of columns */
+  column-gap: 1rem; /* Spacing between columns */
+}
 
+.masonry-container > div {
+  break-inside: avoid; /* Prevents breaking content across columns */
+  margin-bottom: 1rem; /* Adds spacing between items */
+}
 
 .hide-scrollbar {
   overflow-x:hidden; /* Keep horizontal scrolling */

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Showcase from "./Showcase";
-import { workProjects, scripts, motionProjects, infoContent } from "../data";
+import { workProjects, scripts, motionProjects, infoContent} from "../data";
+import { storage, ref, listAll, getDownloadURL } from "../firebase";
 import reelVideo from "../assets/reel.mp4";
 
 const pageVariants = {
@@ -14,6 +15,9 @@ const pageVariants = {
 const DummyPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [photos, setPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   // Dynamic page title based on route
   useEffect(() => {
@@ -24,13 +28,42 @@ const DummyPage = () => {
       "/art": "Dir.by Yung Havy | Art",
       "/reel": "Dir.by Yung Havy | Reel",
       "/info": "Dir.by Yung Havy | Info",
+      "/photos": "Dir.by Yung Havy | Photos",
     };
     document.title = pageTitleMap[location.pathname] || "Dir.by Yung Havy";
   }, [location.pathname]);
 
+   // Fetch photos from Firebase Storage
+   useEffect(() => {
+    const fetchPhotos = async () => {
+      const photosRef = ref(storage, "photos/"); // Reference to your "photos" folder in Firebase Storage
+      try {
+        const res = await listAll(photosRef); // List all files in the photos folder
+        const urls = await Promise.all(
+          res.items.map(async (itemRef) => {
+            const url = await getDownloadURL(itemRef); // Get download URL for each image
+            return {
+              id: itemRef.name,
+              image: url,
+            };
+          })
+        );
+        setPhotos(urls); // Set photos state
+        setLoading(false); // Set loading to false after fetching
+      } catch (error) {
+        console.error("Error fetching photos:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchPhotos();
+  }, []);
+
+
   // Determine page-specific content
   const isReelsPage = location.pathname.includes("reel");
   const isInfoPage = location.pathname.includes("info");
+  const isPhotoPage = location.pathname.includes("photos");
 
   let title = "";
   let description = "";
@@ -39,13 +72,13 @@ const DummyPage = () => {
 
   switch (location.pathname) {
     case "/work":
-      title = "Work";
+      title = "PCE";
       description = "PROJECTS | COLLABORATIONS | EXPLORATIONS";
       projects = workProjects;
       linkType = "youtubeLink";
       break;
     case "/scripts":
-      title = "Idea";
+      title = "SSA";
       description = "SCRIPTS | STORY | ARTICLES";
       projects = scripts;
       linkType = "mediumLink";
@@ -57,8 +90,13 @@ const DummyPage = () => {
       linkType = "behanceLink";
       break;
     case "/info":
-      title = "Info";
+      title = "BSC";
       description = "BIOGRAPHY | SERVICES | CONTACT";
+      break;
+    case "/photos":
+      title = "PRV";
+      description = "PHOTOGRAPHY | RETOUCH | VISUALS";
+      projects = photos;
       break;
     default:
       title = "Portfolio";
@@ -69,6 +107,7 @@ const DummyPage = () => {
   const handleClose = () => {
     navigate("/");
   };
+  const columnCount = window.innerWidth > 1200 ? 4 : window.innerWidth > 768 ? 2 : 1;
 
   return (
     <motion.div
@@ -140,6 +179,43 @@ const DummyPage = () => {
             <p className="text-xs md:text-base lg:text-lg">{description}</p>
           </div>
 
+
+          {isPhotoPage && (
+  <div
+    className="masonry-container"
+    style={{
+      columnCount: columnCount,
+       // Adjust columns for responsiveness
+      columnGap: '1rem',
+    }}
+  >
+    {photos.map((photo) => (
+      <div
+        key={photo.id}
+        style={{
+          breakInside: 'avoid', // Prevent items from breaking across columns
+          marginBottom: '1rem',
+        }}
+        className="rounded-lg overflow-hidden bg-gray-800 shadow-lg"
+      >
+        <img
+          src={photo.image}
+          alt={photo.id}
+          loading="lazy"
+          className="w-full"
+          style={{
+            display: 'block', // Ensure no inline spacing issues
+            height: 'auto', // Maintain aspect ratio
+          }}
+        />
+      </div>
+    ))}
+  </div>
+)}
+
+
+         
+
           {/* Info Page Content */}
           {isInfoPage && (
             <div className="info-content mt-80 px-4">
@@ -181,7 +257,7 @@ const DummyPage = () => {
           )}
 
           {/* Showcase Projects */}
-          {!isInfoPage && projects.length > 0 && (
+          {!isInfoPage && !isPhotoPage && projects.length > 0 && (
             <div className="list mt-72">
               <Showcase projects={projects} linkType={linkType} />
             </div>
