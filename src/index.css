@@ -105,6 +105,15 @@ code {
     padding-top: 1vw;
   }
 }
+
+@media (max-width: 768px) {
+  .absolute.top-4.right-4 {
+    top: 2rem; /* Adjust for smaller screens */
+    right: 2rem;
+    font-size: 0.8rem; /* Smaller button */
+    padding: 0.5rem 1rem;
+  }
+}
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .list-item {
