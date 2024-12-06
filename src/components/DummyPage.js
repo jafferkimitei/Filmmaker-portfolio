@@ -129,7 +129,7 @@ const DummyPage = () => {
               top: "22vh",
               margin: "0 auto",
               textTransform: "uppercase",
-              color: "rgba(255, 255, 255, .5)",
+              color: "#F3C623",
               letterSpacing: "0.8vw",
               pointerEvents: "none",
               textAlign: "center",
@@ -166,7 +166,7 @@ const DummyPage = () => {
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 bg-gray-400 hover:bg-gray-200 rounded-full cursor-pointer"
+                      className="p-2 bg-gray-400 hover:bg-[#F3C623] rounded-full cursor-pointer"
                     >
                       <img
                         src={item.icon}
