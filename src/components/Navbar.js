@@ -42,10 +42,11 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-transform duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+      className={`fixed top-0 w-full transition-transform duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
       style={{
         background: "rgba(0, 0, 0, 0.4)",
         backdropFilter: "blur(5px)",
+        zIndex: 1000,
       }}
     >
       {/* Desktop Menu */}
@@ -55,7 +56,7 @@ const Navbar = () => {
         </li>
         <li>|</li>
         <li className="px-4">
-          <Link to="/work" onClick={handleLinkClick}>Work</Link>
+          <Link to="/films" onClick={handleLinkClick}>Films</Link>
         </li>
         <li>|</li>
         <li className="px-4">
@@ -82,7 +83,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div className="md:hidden flex justify-between items-center py-6 px-4">
         <button
-          className="text-white z-50"
+          className="text-white"
           onClick={handleHamburgerClick}
           aria-label="Toggle menu"
         >
@@ -105,15 +106,16 @@ const Navbar = () => {
       {/* Mobile menu links with fade-in and fade-out */}
       <div
         className={`md:hidden flex flex-col items-center justify-center bg-black text-white py-4 transition-opacity duration-500 fixed top-0 left-0 w-full h-screen ${
-          isMenuOpen ? "opacity-100" : "opacity-0"
+          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         style={{
           backgroundColor: "rgba(0, 0, 0, 1)", // Darken background for a full-page effect
           position: "fixed", // Ensure the menu stays fixed in place
+          zIndex: 2000,
         }}
       >
         <Link to="/" onClick={handleLinkClick} className="py-4 text-xl font-futura">Home</Link>
-        <Link to="/work" onClick={handleLinkClick} className="py-4 text-xl font-futura">Work</Link>
+        <Link to="/films" onClick={handleLinkClick} className="py-4 text-xl font-futura">Films</Link>
         <Link to="/scripts" onClick={handleLinkClick} className="py-4 text-xl font-futura">Scripts</Link>
         <Link to="/reel" onClick={handleLinkClick} className="py-4 text-xl font-futura">Reel</Link>
         <Link to="/info" onClick={handleLinkClick} className="py-4 text-xl font-futura">Info</Link>

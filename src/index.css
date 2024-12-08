@@ -142,7 +142,14 @@ code {
   }
 }
 
+.link-wrapper {
+  position: relative;
+  z-index: 50; /* Ensure it's above other elements */
+}
 
+.blocking-element {
+  pointer-events: none; /* Disable clicks on blocking elements */
+}
 
 
 .section-title {

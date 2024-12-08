@@ -23,7 +23,7 @@ const DummyPage = () => {
   useEffect(() => {
     const pageTitleMap = {
       "/": "Dir.by Yung Havy | Portfolio",
-      "/work": "Dir.by Yung Havy | Work",
+      "/films": "Dir.by Yung Havy | Films",
       "/scripts": "Dir.by Yung Havy | Scripts",
       "/art": "Dir.by Yung Havy | Art",
       "/reel": "Dir.by Yung Havy | Reel",
@@ -71,9 +71,9 @@ const DummyPage = () => {
   let linkType = "";
 
   switch (location.pathname) {
-    case "/work":
+    case "/films":
       title = "PCE";
-      description = "PROJECTS | COLLABORATIONS | EXPLORATIONS";
+      description = "PROJECTS | COLLABS | EXPLORATIONS";
       projects = workProjects;
       linkType = "youtubeLink";
       break;
@@ -256,12 +256,15 @@ const DummyPage = () => {
             </div>
           )}
 
-          {/* Showcase Projects */}
-          {!isInfoPage && !isPhotoPage && projects.length > 0 && (
-            <div className="list mt-72">
+         {/* Showcase Projects */}
+        {!isInfoPage && !isPhotoPage && projects.length > 0 && (
+          <div className="list mt-72">
+            <div className="link-wrapper">
               <Showcase projects={projects} linkType={linkType} />
             </div>
-          )}
+          </div>
+        )}
+
         </>
       )}
     </motion.div>

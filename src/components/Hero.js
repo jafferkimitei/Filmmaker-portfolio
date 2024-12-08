@@ -26,7 +26,7 @@ const Hero = () => {
       {/* Foreground Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full">
         <motion.h1
-          className="text-center text-5xl mt-4 uppercase text-yellow-500 tracking-[20px] sm:tracking-[30px] md:tracking-45px]"
+          className="text-center text-5xl mt-4 uppercase text-yellow-500 tracking-[5px]"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -39,7 +39,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          Filmmaker | Editor | Scriptwriter
+          Filmmaker | Photographer | Writer
         </motion.p>
       </div>
 
@@ -50,7 +50,7 @@ const Hero = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.7 }}
       >
-        {["Work", "Scripts", "Reel", "Info", "Art", "Photos"].map((item) => (
+        {["Films", "Scripts","Photos", "Info", "Reel","Art"].map((item) => (
           <span
             key={item}
             className="text-sm uppercase text-[#F3C623] tracking-[5px] sm:tracking-[10px] md:tracking-[15px] mx-2 cursor-pointer hover:text-white"

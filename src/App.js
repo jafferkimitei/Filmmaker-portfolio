@@ -64,7 +64,7 @@ function App() {
       <AnimatePresence mode="wait" initial={false} onExitComplete={() => wooshSound.play()}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Hero />} />
-          <Route path="/work" element={<DummyPage />}  projects={workProjects}
+          <Route path="/films" element={<DummyPage />}  projects={workProjects}
       linkType="youtubeLink" />
           <Route path="/scripts" element={<DummyPage />} projects={scripts}
       linkType="mediumLink" />
