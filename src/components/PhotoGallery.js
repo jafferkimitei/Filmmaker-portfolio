@@ -107,7 +107,7 @@ const PhotoGallery = () => {
               {/* Download Icon in Top-Right Corner */}
               <div
                 onClick={() => downloadImage(url, name)} // Trigger download on click
-                className="absolute top-2 right-2 p-2 bg-black text-white rounded-full cursor-pointer opacity-70 hover:opacity-100"
+                className="absolute top-2 right-2 p-2 bg-black text-white rounded-full cursor-pointer opacity-70 hover:opacity-100 hidden md:block" // Hide icon on small screens
               >
                 <FaDownload size={24} />
               </div>
