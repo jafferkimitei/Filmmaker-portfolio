@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { storage, ref, list, getDownloadURL } from "../firebase";
 import Masonry from "react-masonry-css";
 import { FaDownload } from "react-icons/fa"; // Import the download icon
 
 const PhotoGallery = () => {
+  const location = useLocation();
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [nextPageToken, setNextPageToken] = useState(null);
   const [hasMore, setHasMore] = useState(true);
+
+  useEffect(() => {
+    const pageTitleMap = {
+      "/Sanaa-connect": "Dir.by Yung Havy | Sanaa Connect",
+    };
+    document.title = pageTitleMap[location.pathname] || "Dir.by Yung Havy";
+  }, [location.pathname]);
 
   // Function to fetch photos in chunks
   const fetchPhotos = async (pageToken = null) => {
@@ -55,6 +64,12 @@ const PhotoGallery = () => {
     link.click(); // Programmatically click the link to start the download
   };
 
+  // Function to handle right-click (long press) event for downloading
+  const handleContextMenu = (e, url, name) => {
+    e.preventDefault(); // Prevent the default context menu from appearing
+    downloadImage(url, name); // Trigger the download
+  };
+
   // Fetch the first batch on component mount
   useEffect(() => {
     fetchPhotos();
@@ -87,6 +102,7 @@ const PhotoGallery = () => {
                 alt={`Photo ${index + 1}`}
                 className="w-full h-auto rounded-lg shadow-lg"
                 loading="lazy"
+                onContextMenu={(e) => handleContextMenu(e, url, name)} 
               />
               {/* Download Icon in Top-Right Corner */}
               <div
