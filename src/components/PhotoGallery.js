@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { storage, ref, list, getDownloadURL } from "../firebase";
 import Masonry from "react-masonry-css";
-import { FaDownload } from "react-icons/fa"; // Import the download icon
+import { FaDownload } from "react-icons/fa";
 
 const PhotoGallery = () => {
   const location = useLocation();
@@ -24,12 +24,12 @@ const PhotoGallery = () => {
 
     try {
       const photosRef = ref(storage, "Sanaa_connect/");
-      const result = await list(photosRef, { maxResults: 10, pageToken });
+      const result = await list(photosRef, { maxResults: 12, pageToken });
 
       const urls = await Promise.all(
         result.items.map(async (item) => {
           const downloadUrl = await getDownloadURL(item);
-          return { url: downloadUrl, name: item.name }; // Include filename
+          return { url: downloadUrl, name: item.name };
         })
       );
 
