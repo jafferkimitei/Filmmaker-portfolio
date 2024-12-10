@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FiMenu, FiX } from "react-icons/fi"; // Import icons
 import clickSound from "../assets/click.wav";
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // For toggling mobile menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLinkClick = (e) => {
     const audio = new Audio(clickSound);
     audio.volume = 0.2;
     audio.play();
-    // Close the mobile menu when a link is clicked
-    setIsMenuOpen(false);
+    setIsMenuOpen(false); // Close the mobile menu when a link is clicked
   };
 
   const handleHamburgerClick = () => {
@@ -29,20 +29,17 @@ const Navbar = () => {
 
   useEffect(() => {
     // Disable scroll when menu is open
-    if (isMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto"; // Reset to default
-    }
-
+    document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
     return () => {
-      document.body.style.overflow = "auto"; // Reset on cleanup
+      document.body.style.overflow = "auto";
     };
   }, [isMenuOpen]);
 
   return (
     <nav
-      className={`fixed top-0 w-full transition-transform duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+      className={`fixed top-0 w-full transition-transform duration-300 ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
       style={{
         background: "rgba(0, 0, 0, 0.4)",
         backdropFilter: "blur(5px)",
@@ -63,10 +60,6 @@ const Navbar = () => {
           <Link to="/scripts" onClick={handleLinkClick}>Scripts</Link>
         </li>
         <li>|</li>
-        {/* <li className="px-4">
-          <Link to="/reel" onClick={handleLinkClick}>Reel</Link>
-        </li>
-        <li>|</li> */}
         <li className="px-4">
           <Link to="/info" onClick={handleLinkClick}>Info</Link>
         </li>
@@ -82,24 +75,13 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div className="md:hidden flex justify-between items-center py-6 px-4">
+        {/* Hamburger / Close Icon */}
         <button
-          className="text-white"
           onClick={handleHamburgerClick}
+          className="text-white text-3xl focus:outline-none"
           aria-label="Toggle menu"
         >
-          {isMenuOpen ? (
-            <>
-              {/* X Icon */}
-              <div className="w-6 h-0.5 bg-white mb-1 rotate-45 transform origin-center"></div>
-              <div className="w-6 h-0.5 bg-white mb-1 -rotate-45 transform origin-center"></div>
-            </>
-          ) : (
-            <>
-              {/* Hamburger Icon */}
-              <div className="w-6 h-0.5 bg-white mb-1"></div>
-              <div className="w-6 h-0.5 bg-white mb-1"></div>
-            </>
-          )}
+          {isMenuOpen ? <FiX /> : <FiMenu />}
         </button>
       </div>
 
@@ -109,18 +91,23 @@ const Navbar = () => {
           isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         style={{
-          backgroundColor: "rgba(0, 0, 0, 1)", // Darken background for a full-page effect
-          position: "fixed", // Ensure the menu stays fixed in place
+          backgroundImage: "linear-gradient(135deg, #1e1e1e, #000)",
           zIndex: 2000,
         }}
       >
-        <Link to="/" onClick={handleLinkClick} className="py-4 text-xl font-futura">Home</Link>
-        <Link to="/films" onClick={handleLinkClick} className="py-4 text-xl font-futura">Films</Link>
-        <Link to="/scripts" onClick={handleLinkClick} className="py-4 text-xl font-futura">Scripts</Link>
-        {/* <Link to="/reel" onClick={handleLinkClick} className="py-4 text-xl font-futura">Reel</Link> */}
-        <Link to="/info" onClick={handleLinkClick} className="py-4 text-xl font-futura">Info</Link>
-        <Link to="/art" onClick={handleLinkClick} className="py-4 text-xl font-futura">Art</Link>
-        <Link to="/photos" onClick={handleLinkClick} className="py-4 text-xl font-futura">Photos</Link>
+         <button
+          onClick={() => setIsMenuOpen(false)}
+          className="absolute top-6 left-4 w-8 h-8 flex items-center justify-center bg-transparent text-white text-3xl hover:text-gray-300 transition duration-300"
+          aria-label="Close menu"
+        >
+          &times; 
+        </button>
+        <Link to="/" onClick={handleLinkClick} className="py-4 text-2xl font-futura">Home</Link>
+        <Link to="/films" onClick={handleLinkClick} className="py-4 text-2xl font-futura">Films</Link>
+        <Link to="/scripts" onClick={handleLinkClick} className="py-4 text-2xl font-futura">Scripts</Link>
+        <Link to="/info" onClick={handleLinkClick} className="py-4 text-2xl font-futura">Info</Link>
+        <Link to="/art" onClick={handleLinkClick} className="py-4 text-2xl font-futura">Art</Link>
+        <Link to="/photos" onClick={handleLinkClick} className="py-4 text-2xl font-futura">Photos</Link>
       </div>
     </nav>
   );

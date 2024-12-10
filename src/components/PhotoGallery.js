@@ -13,10 +13,18 @@ const PhotoGallery = () => {
 
   useEffect(() => {
     const pageTitleMap = {
-      "/Sanaa-connect": "Dir.by Yung Havy | Sanaa Connect",
+      "/sanaa-connect": "Dir.by Yung Havy | Sanaa Connect",
     };
     document.title = pageTitleMap[location.pathname] || "Dir.by Yung Havy";
   }, [location.pathname]);
+
+//   <button
+//   onClick={() => setIsMenuOpen(false)}
+//   className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center bg-transparent text-white text-3xl hover:text-gray-300 transition duration-300"
+//   aria-label="Close menu"
+// >
+//   &times; 
+// </button>
 
   // Function to fetch photos in chunks
   const fetchPhotos = async (pageToken = null) => {
@@ -126,7 +134,7 @@ const PhotoGallery = () => {
         </button>
       )}
 
-      {loading && <p className="text-center mt-4">Loading more photos...</p>}
+      {loading && <p className="text-center mt-4">Loading sanaa photos...</p>}
     </div>
   );
 };

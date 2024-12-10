@@ -195,6 +195,15 @@ code {
     margin-inline-end: 0px;
     unicode-bidi: isolate;
 }
+button {
+  position: relative;
+  width: 1.5rem; /* Adjust size as needed */
+  height: 1.5rem;
+}
+
+button div {
+  transition: all 0.3s ease; /* Smooth animation for transitions */
+}
 
 /* Container Styles */
 .container {
