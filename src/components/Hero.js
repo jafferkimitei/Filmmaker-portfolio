@@ -50,7 +50,7 @@ const Hero = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.7 }}
       >
-        {["Films", "Scripts","Photos", "Info", "Reel","Art"].map((item) => (
+        {["Films", "Scripts","Photos", "Info","Art"].map((item) => (
           <span
             key={item}
             className="text-sm uppercase text-[#F3C623] tracking-[5px] sm:tracking-[10px] md:tracking-[15px] mx-2 cursor-pointer hover:text-white"

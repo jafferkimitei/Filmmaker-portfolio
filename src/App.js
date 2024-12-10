@@ -7,6 +7,7 @@ import DummyPage from "./components/DummyPage";
 import Navbar from "./components/Navbar";
 import bgMusic from "./assets/bgmusic2.mp3";
 import wooshEffect from "./assets/woosh.wav";
+import PhotoGallery from "./components/PhotoGallery";
 import { workProjects, scripts, motionProjects } from "./data";
 
 
@@ -64,6 +65,7 @@ function App() {
       <AnimatePresence mode="wait" initial={false} onExitComplete={() => wooshSound.play()}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Hero />} />
+          <Route path="/sanaa-connect" element={<PhotoGallery />} />
           <Route path="/films" element={<DummyPage />}  projects={workProjects}
       linkType="youtubeLink" />
           <Route path="/scripts" element={<DummyPage />} projects={scripts}
