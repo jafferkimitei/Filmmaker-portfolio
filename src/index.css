@@ -20,6 +20,11 @@ code {
 }
 
 
+
+.subtitle {
+  position: relative; /* Ensures it can have a z-index */
+  z-index: 20; /* Higher than any other overlapping element */
+}
 .masonry-container {
   margin-top: 35vh;
   margin-left: 5vw;
@@ -195,15 +200,7 @@ code {
     margin-inline-end: 0px;
     unicode-bidi: isolate;
 }
-button {
-  position: relative;
-  width: 1.5rem; /* Adjust size as needed */
-  height: 1.5rem;
-}
 
-button div {
-  transition: all 0.3s ease; /* Smooth animation for transitions */
-}
 
 /* Container Styles */
 .container {
@@ -277,40 +274,7 @@ h1 {
   transform: scale(1.05); /* Slight zoom effect on hover */
 }
 
-/* Download Button Styles */
-.download-btn {
-  display: block;
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #2563eb;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
 
-.download-btn:hover {
-  background-color: #1e40af;
-}
-
-.download-all-btn {
-  padding: 12px 24px;
-  background-color: #38a169;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 40px;
-  display: block;
-}
-
-.download-all-btn:hover {
-  background-color: #2f855a;
-}
 
 /* Loading Text */
 p {

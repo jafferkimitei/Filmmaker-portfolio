@@ -36,7 +36,7 @@ const DummyPage = () => {
    // Fetch photos from Firebase Storage
    useEffect(() => {
     const fetchPhotos = async () => {
-      const photosRef = ref(storage, "photos/"); // Reference to your "photos" folder in Firebase Storage
+      const photosRef = ref(storage, "photos/");
       try {
         const res = await listAll(photosRef); // List all files in the photos folder
         const urls = await Promise.all(

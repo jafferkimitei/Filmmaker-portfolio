@@ -18,14 +18,6 @@ const PhotoGallery = () => {
     document.title = pageTitleMap[location.pathname] || "Dir.by Yung Havy";
   }, [location.pathname]);
 
-//   <button
-//   onClick={() => setIsMenuOpen(false)}
-//   className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center bg-transparent text-white text-3xl hover:text-gray-300 transition duration-300"
-//   aria-label="Close menu"
-// >
-//   &times; 
-// </button>
-
   // Function to fetch photos in chunks
   const fetchPhotos = async (pageToken = null) => {
     setLoading(true);
@@ -66,16 +58,16 @@ const PhotoGallery = () => {
 
   // Function to trigger the download
   const downloadImage = (url, name) => {
-    const link = document.createElement("a"); // Create an invisible anchor link
-    link.href = url; // Set the href to the Firebase download URL
-    link.download = name; // Set the download attribute to the image's name
-    link.click(); // Programmatically click the link to start the download
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = name;
+    link.click();
   };
 
   // Function to handle right-click (long press) event for downloading
   const handleContextMenu = (e, url, name) => {
-    e.preventDefault(); // Prevent the default context menu from appearing
-    downloadImage(url, name); // Trigger the download
+    e.preventDefault();
+    downloadImage(url, name);
   };
 
   // Fetch the first batch on component mount
@@ -85,16 +77,33 @@ const PhotoGallery = () => {
 
   // Breakpoints for Masonry
   const masonryBreakpoints = {
-    default: 4, // Default to 4 columns
-    1100: 3,    // 3 columns for screens >= 1100px
-    700: 2,     // 2 columns for screens >= 700px
-    500: 1,     // 1 column for smaller screens
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1,
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-[#F3C623] text-4xl font-bold mt-6 mb-4">Sanaa Connect</h1>
+      {/* Page Title */}
+      <h1 className="text-[#F3C623] text-4xl font-bold mt-6 mb-4">Sanaa Connect Event</h1>
 
+      {/* Download All Photos Button */}
+      <div className="flex justify-start mt-8 mb-4 ">
+        <button 
+         onClick={() =>
+          window.open(
+            "https://drive.google.com/drive/folders/1BUUuk9wXt_Q_Jf3u1Qwnl8Ye9E5OrYfF?usp=sharing",
+            "_blank"
+          )
+        }
+        className="bg-yellow-300 hover:bg-yellow-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+         <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+          <span>Download here</span>
+        </button>
+      </div>
+
+      {/* Masonry Grid */}
       <Masonry
         breakpointCols={masonryBreakpoints}
         className="masonry-grid"
@@ -102,23 +111,14 @@ const PhotoGallery = () => {
       >
         {photos.map(({ url, name }, index) => (
           <div key={name} className="relative">
-            {/* Photo Container */}
             <div className="photo-container">
-              {/* Image */}
               <img
                 src={url}
                 alt={`Photo ${index + 1}`}
                 className="w-full h-auto rounded-lg shadow-lg"
                 loading="lazy"
-                onContextMenu={(e) => handleContextMenu(e, url, name)} 
+                onContextMenu={(e) => handleContextMenu(e, url, name)}
               />
-              {/* Download Icon in Top-Right Corner */}
-              <div
-                onClick={() => downloadImage(url, name)} // Trigger download on click
-                className="absolute top-2 right-2 p-2 bg-black text-white rounded-full cursor-pointer opacity-70 hover:opacity-100 hidden md:block" // Hide icon on small screens
-              >
-                <FaDownload size={24} />
-              </div>
             </div>
           </div>
         ))}
@@ -128,12 +128,13 @@ const PhotoGallery = () => {
       {hasMore && !loading && (
         <button
           onClick={() => fetchPhotos(nextPageToken)}
-          className="mt-4 px-4 py-2 bg-[#F3C623] text-black rounded-lg shadow-lg hover:bg-[#ffd439]"
+          className="mt-4 px-6 py-4 bg-gradient-to-r from-[#F3C623] to-[#ffd439] text-black font-semibold rounded-full shadow-md hover:shadow-lg transform transition duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-yellow-300 text-lg flex items-center justify-center"
         >
-          Load More
+          View More
         </button>
       )}
 
+      {/* Loading Indicator */}
       {loading && <p className="text-center mt-4">Loading sanaa photos...</p>}
     </div>
   );
